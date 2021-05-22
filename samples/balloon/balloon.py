@@ -33,6 +33,8 @@ import json
 import datetime
 import numpy as np
 import skimage.draw
+import imgaug.augmenters as iaa
+import mrcnn.Augment_config as aug
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -188,6 +190,9 @@ def train(model):
     dataset_val.load_balloon(args.dataset, "val")
     dataset_val.prepare()
 
+    
+
+
     # *** This training schedule is an example. Update to your needs ***
     # Since we're using a very small dataset, and starting from
     # COCO trained weights, we don't need to train too long. Also,
@@ -196,7 +201,8 @@ def train(model):
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
                 epochs=30,
-                layers='heads')
+                layers='heads',
+                augmentation = aug.AUGMENTATIONS)
 
 
 def color_splash(image, mask):
@@ -233,9 +239,12 @@ def detect_and_color_splash(model, image_path=None, video_path=None):
         # Color splash
         splash = color_splash(image, r['masks'])
         # Save output
-        file_name = "splash_{:%Y%m%dT%H%M%S}.png".format(datetime.datetime.now())
+
+        file_name = f"Splash_{os.path.split(image_path)[-1]}.png"
         skimage.io.imsave(file_name, splash)
+
     elif video_path:
+
         import cv2
         # Video capture
         vcapture = cv2.VideoCapture(video_path)
@@ -244,7 +253,10 @@ def detect_and_color_splash(model, image_path=None, video_path=None):
         fps = vcapture.get(cv2.CAP_PROP_FPS)
 
         # Define codec and create video writer
-        file_name = "splash_{:%Y%m%dT%H%M%S}.avi".format(datetime.datetime.now())
+
+        file_name = f"Splash_{os.path.split(video_path)[-1]}.mp4"
+
+        # file_name = "splash_{:%Y%m%dT%H%M%S}.avi".format(datetime.datetime.now())
         vwriter = cv2.VideoWriter(file_name,
                                   cv2.VideoWriter_fourcc(*'MJPG'),
                                   fps, (width, height))
