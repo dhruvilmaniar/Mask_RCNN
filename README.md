@@ -19,7 +19,7 @@ Fork of [Matterport Mask-RCNN](https://github.com/matterport/Mask_RCNN)
 
 ### Dataset format:
 ```bash
-.
+dataset
 ├── train
 │   ├── dog_050.jpg
 │   ├── ...
