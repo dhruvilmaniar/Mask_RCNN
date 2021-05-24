@@ -32,6 +32,7 @@ dataset
 `via_region_data.json` contains annotations for all images in that folder.
 
 No need to add masks. Only Images are required, with annotations in json file.
+Checkout dataset previous commits (411179c) for example.
 
 
 ## Usage
