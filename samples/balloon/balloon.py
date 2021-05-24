@@ -1,10 +1,6 @@
 """
 Mask R-CNN
-Train on the toy Balloon dataset and implement color splash effect.
-
-Copyright (c) 2018 Matterport, Inc.
-Licensed under the MIT License (see LICENSE for details)
-Written by Waleed Abdulla
+training on custom dataset like balloon detection and splash effect on it.
 
 ------------------------------------------------------------
 
@@ -30,7 +26,6 @@ Usage: import the module (see Jupyter notebooks for examples), or run from
 import os
 import sys
 import json
-import datetime
 import numpy as np
 import skimage.draw
 import imgaug.augmenters as iaa
